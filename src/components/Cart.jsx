@@ -3,16 +3,21 @@ import React from 'react';
 const Cart = ({ cartItems, removeFromCart, updateQuantity, confirmOrder, total, isMobile = false }) => {
   if (cartItems.length === 0) {
     return (
-      <div className="bg-white rounded-lg shadow-md p-6 sticky top-6">
-        <h2 className="text-2xl font-bold mb-6">Your Cart</h2>
+      <div className="bg-white rounded-lg shadow p-6 w-full max-w-md mx-auto flex flex-col items-center text-center">
+        <h2 className="text-2xl font-bold mb-4 text-orange-700">Your Cart</h2>
+        
+        <div className="flex justify-center w-full">
+          <img 
+            src="/images/illustration-empty-cart.svg" 
+            alt="empty cart" 
+            className="w-32 mb-4" 
+          />
+        </div>
+
         <p className="text-gray-500">Your cart is empty.</p>
       </div>
     );
   }
-
-  const handleImageError = (e) => {
-    e.target.src = '/api/placeholder/200/200';
-  };
 
   return (
     <div className={`bg-white rounded-lg shadow-md p-6 ${!isMobile ? 'sticky top-6' : ''}`}>
@@ -22,18 +27,6 @@ const Cart = ({ cartItems, removeFromCart, updateQuantity, confirmOrder, total, 
         {cartItems.map(item => (
           <div key={item.id} className="flex items-center justify-between pb-4 border-b">
             <div className="flex items-center">
-              <div className="w-12 h-12 bg-gray-200 rounded overflow-hidden">
-                <picture>
-                  <source media="(max-width: 640px)" srcSet={item.image.mobile} />
-                  <source media="(max-width: 1024px)" srcSet={item.image.tablet} />
-                  <img 
-                    src={item.image.desktop} 
-                    alt={item.name}
-                    className="w-full h-full object-cover"
-                    onError={handleImageError}
-                  />
-                </picture>
-              </div>
               <div className="ml-4">
                 <h3 className="font-medium">{item.name}</h3>
                 <p className="text-gray-600">${item.price.toFixed(2)}</p>
@@ -45,9 +38,9 @@ const Cart = ({ cartItems, removeFromCart, updateQuantity, confirmOrder, total, 
                 className="text-gray-500 hover:text-orange-500 focus:outline-none focus:text-orange-500 p-1"
                 aria-label="Decrease quantity"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                {/* <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z" clipRule="evenodd" />
-                </svg>
+                </svg> */}
               </button>
               <span className="mx-2" aria-live="polite">{item.quantity}</span>
               <button

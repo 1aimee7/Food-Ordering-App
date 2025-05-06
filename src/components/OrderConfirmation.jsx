@@ -1,6 +1,10 @@
 import React from 'react';
 
 const OrderConfirmation = ({ cartItems, total, startNewOrder }) => {
+  const handleImageError = (e) => {
+    e.target.src = '/api/placeholder/50/50'; // Fallback placeholder for thumbnails
+  };
+
   return (
     <div 
       className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
@@ -18,10 +22,18 @@ const OrderConfirmation = ({ cartItems, total, startNewOrder }) => {
         
         <div className="max-h-60 overflow-y-auto mb-6">
           {cartItems.map(item => (
-            <div key={item.id} className="flex justify-between py-2 border-b">
-              <div className="flex">
-                <span className="font-medium">{item.quantity}x</span>
-                <span className="ml-2">{item.name}</span>
+            <div key={item.id} className="flex justify-between py-2 border-b items-center">
+              <div className="flex items-center">
+                <img 
+                  src={item.image.thumbnail} 
+                  alt={`${item.name} thumbnail`}
+                  className="w-12 h-12 object-cover mr-2 rounded"
+                  onError={handleImageError}
+                />
+                <div>
+                  <span className="font-medium">{item.quantity}x</span>
+                  <span className="ml-2">{item.name}</span>
+                </div>
               </div>
               <span>${(item.price * item.quantity).toFixed(2)}</span>
             </div>

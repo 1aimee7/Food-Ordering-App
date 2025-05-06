@@ -24,7 +24,7 @@ const ProductCard = ({ product, addToCart }) => {
         <p className="text-gray-600 mt-1">${product.price.toFixed(2)}</p>
         <button
           onClick={() => addToCart(product)}
-          className="mt-4 w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50 transition-colors"
+          className="mt-4 w-full bg-orange-500 text-white py-2 rounded-3xl hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50 transition-colors"
           aria-label={`Add ${product.name} to cart`}
         >
           Add to Cart
